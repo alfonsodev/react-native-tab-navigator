@@ -13,8 +13,9 @@ import Badge from './Badge';
 import Layout from './Layout';
 import StaticContainer from './StaticContainer';
 import Tab from './Tab';
-import TabBar from './TabBar';
+import DefaultTabBar from './TabBar';
 import TabNavigatorItem from './TabNavigatorItem';
+var TabBar;
 
 export default class TabNavigator extends React.Component {
   static propTypes = {
@@ -22,7 +23,8 @@ export default class TabNavigator extends React.Component {
     sceneStyle: View.propTypes.style,
     tabBarStyle: TabBar.propTypes.style,
     tabBarShadowStyle: TabBar.propTypes.shadowStyle,
-    hidesTabTouch: PropTypes.bool
+    hidesTabTouch: PropTypes.bool,
+    customTabBar: PropTypes.node
   };
 
   constructor(props, context) {
@@ -30,7 +32,7 @@ export default class TabNavigator extends React.Component {
     this.state = {
       renderedSceneKeys: this._updateRenderedSceneKeys(props.children),
     };
-
+    TabBar = (this.props.customTabBar) ? this.props.customTabBar : DefaultTabBar;
     this._renderTab = this._renderTab.bind(this);
   }
 
